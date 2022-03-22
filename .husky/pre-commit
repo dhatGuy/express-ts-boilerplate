@@ -1,4 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint-staged
+echo 'Running pre-commit hook...'
+
+npx lint-staged ||
+(
+  echo 'Linting failed!';
+  false;
+)
+
+echo 'Done!'
