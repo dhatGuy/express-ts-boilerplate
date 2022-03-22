@@ -7,9 +7,21 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "ts-node-dev --respawn --rs --pretty --transpile-only src/index.ts",
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --ext .ts . --fix",
-    "build": "prisma generate && tsc"
+    "lint": "eslint --ext .ts",
+    "lint:fix": "eslint --ext .ts --fix",
+    "build": "prisma generate && tsc",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": ""
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --ext .ts --fix"
+    ]
   },
   "license": "MIT",
   "dependencies": {
@@ -27,6 +39,8 @@
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "eslint": "^8.11.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.3.7",
     "prisma": "^3.11.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.2",
