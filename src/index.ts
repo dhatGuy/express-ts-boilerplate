@@ -1,7 +1,5 @@
-import cors from "cors";
 import * as dotenv from "dotenv";
-import express from "express";
-import helmet from "helmet";
+import app from "./app";
 
 dotenv.config();
 
@@ -9,13 +7,7 @@ if (!process.env.PORT) {
   process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT , 10);
-
-const app = express();
-
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+const PORT: number = parseInt(process.env.PORT, 10);
 
 app.listen(PORT, () => {
   console.log(`✨ Magic happening on port ${PORT} ✨`);
