@@ -16,7 +16,7 @@ export const errorMiddleware = (
     statusCode: statusCode || HttpStatus.INTERNAL_SERVER_ERROR,
     message:
       statusCode === HttpStatus.INTERNAL_SERVER_ERROR
-        ? "An error occurred"
+        ? "Internal Server Error"
         : message,
     validationErrors: errors,
   });
