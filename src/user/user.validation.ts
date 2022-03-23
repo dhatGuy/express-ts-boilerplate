@@ -14,7 +14,6 @@ export const userCreateSchema = _UserModel
   });
 
 export const userUpdateSchema = _UserModel.pick({
-  id: true,
   name: true,
   email: true,
 });

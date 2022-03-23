@@ -11,9 +11,7 @@ class userService {
    * create
    */
   public async create(input: ICreateUserInput): Promise<User> {
-    const user = await prisma.user.findUnique({
-      where: { email: input.email },
-    });
+    const user = await this.getByEmail(input.email);
 
     if (user) {
       throw new HttpException(HttpStatus.BAD_REQUEST, "User already exists");
@@ -40,14 +38,10 @@ class userService {
   /**
    * getById
    */
-  public async getById(id: string): Promise<User> {
+  public async getById(id: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: { id },
     });
-
-    if (!user) {
-      throw new HttpException(HttpStatus.NOT_FOUND, "User not found");
-    }
 
     return user;
   }
@@ -55,14 +49,10 @@ class userService {
   /**
    * getByEmail
    */
-  public async getByEmail(email: string): Promise<User> {
+  public async getByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: { email: email },
     });
-
-    if (!user) {
-      throw new HttpException(HttpStatus.NOT_FOUND, "User not found");
-    }
 
     return user;
   }
@@ -70,16 +60,24 @@ class userService {
   /**
    * delete
    */
-  public async delete(id: string): Promise<User> {
-    await this.getById(id);
+  public async delete(id: string): Promise<User | null> {
+    const user = await this.getById(id);
+
+    if (!user) {
+      throw new HttpException(HttpStatus.NOT_FOUND, "User not found");
+    }
 
     return await prisma.user.delete({
       where: { id },
     });
   }
 
-  public async updateUser(id: string, data: IUpdateUserInput): Promise<User> {
+  public async update(id: string, data: IUpdateUserInput): Promise<User> {
     const user = await this.getById(id);
+
+    if (!user) {
+      throw new HttpException(HttpStatus.NOT_FOUND, "User not found");
+    }
 
     const emailChanged =
       data.email?.trim() &&
