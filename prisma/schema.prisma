@@ -21,6 +21,26 @@ model User {
   name         String
   email        String   @unique /// @zod.email({ message: "Invalid email address" })
   passwordHash String
+  verified     Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model resetTokens {
+  id        Int      @id @default(autoincrement())
+  email     String
+  token     String
+  used      Boolean  @default(false)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+}
+
+model verificationTokens {
+  id        Int      @id @default(autoincrement())
+  email     String
+  token     String
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
 }
