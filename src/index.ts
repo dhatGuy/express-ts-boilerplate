@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import app from "./app";
+import logger from "./utils/logger";
 
 dotenv.config();
 
@@ -10,5 +11,5 @@ if (!process.env.PORT) {
 const PORT: number = parseInt(process.env.PORT, 10);
 
 app.listen(PORT, () => {
-  console.log(`✨ Magic happening on port ${PORT} ✨`);
+  logger.info(`✨ Magic happening on port ${PORT} ✨`);
 });
