@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod"
 
 export const _UserModel = z.object({
   id: z.string().uuid({ message: "Invalid UUID" }),
@@ -7,4 +7,4 @@ export const _UserModel = z.object({
   passwordHash: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
-});
+})
