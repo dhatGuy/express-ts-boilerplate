@@ -6,18 +6,17 @@ import logger from "../utils/logger";
 
 export const validate =
   (schema: AnyZodObject) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
     try {
-      await schema.parseAsync({
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        body: req.body,
-        query: req.query,
-        params: req.params,
-      });
+      schema.parse(req.body);
       return next();
     } catch (error) {
-      logger.info(error);
       if (error instanceof ZodError) {
+        // const errorMessage = error.message
+        //   .map((details) => details.message)
+        //   .join(", ");
+        logger.info(error.flatten());
         throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, error.message);
       }
       throw new HttpException(

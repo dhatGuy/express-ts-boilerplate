@@ -5,10 +5,29 @@
     "src/**/*controller.ts"
   ],
   "spec": {
-    "outputDirectory": "build",
-    "specVersion": 3
+    "outputDirectory": "./src",
+    "specVersion": 3,
+    "basePath": "/api",
+    "securityDefinitions": {
+      "jwt": {
+        "type": "apiKey",
+        "name": "auth-token",
+        "in": "header",
+        "description": "The authorization token"
+      }
+    },
+    "spec": {
+      "servers": [
+        {
+          "url": "http://localhost:7000/api"
+        }
+      ]
+    }
   },
   "routes": {
-    "routesDir": "build"
+    "routesDir": "./src",
+    "basePath": "/api",
+    "authenticationModule": "./src/middleware/auth.middleware.ts",
+    "middleware": "express"
   }
 }
