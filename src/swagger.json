@@ -124,6 +124,44 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"Pick_User.Exclude_keyofUser.passwordHash__": {
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"verified": {
+						"type": "boolean"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"email",
+					"id",
+					"name",
+					"verified",
+					"createdAt",
+					"updatedAt"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_User.passwordHash_": {
+				"$ref": "#/components/schemas/Pick_User.Exclude_keyofUser.passwordHash__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
 			"User": {
 				"properties": {
 					"updatedAt": {
@@ -489,7 +527,9 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"$ref": "#/components/schemas/Omit_User.passwordHash_"
+								}
 							}
 						}
 					}

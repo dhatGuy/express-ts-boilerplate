@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import * as express from "express";
 import { Body, Middlewares, Post, Request, Route, Security, Tags } from "tsoa";
 import { validate } from "../middleware/validation.middleware";
@@ -55,13 +56,15 @@ export class AuthController {
   }
 
   @Post("/confirm-email")
-  async confirmEmail(@Body() body: IVerifyPasswordResetToken) {
+  async confirmEmail(
+    @Body() body: IVerifyPasswordResetToken
+  ): Promise<{ success: boolean }> {
     return await authService.confirmEmail(body);
   }
 
   @Post("/me")
   @Security("jwt")
-  me(@Request() req: express.Request) {
+  me(@Request() req: express.Request): Omit<User, "passwordHash"> {
     return req.user;
   }
 }
