@@ -4,6 +4,7 @@ import {
   Body,
   Delete,
   Get,
+  Middlewares,
   Path,
   Put,
   Request,
@@ -13,8 +14,10 @@ import {
 } from "tsoa";
 import HttpException from "../common/http-exception";
 import { HttpStatus } from "../interfaces/httpStatus";
+import { validate } from "../middleware/validation.middleware";
 import { IUpdateUserInput } from "./user.interface";
 import userService from "./user.service";
+import { userUpdateSchema } from "./user.validation";
 
 @Route("/users")
 @Tags("User")
@@ -38,7 +41,7 @@ export class UserController {
   }
 
   @Put("/:id")
-  // @Middlewares(validate(userUpdateSchema))
+  @Middlewares(validate(userUpdateSchema))
   async updateUser(
     @Path() id: string,
     @Body() input: IUpdateUserInput,
