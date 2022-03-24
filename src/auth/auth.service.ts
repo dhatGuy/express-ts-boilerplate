@@ -32,7 +32,8 @@ class AuthService {
 
     const token = jwt.sign(
       dataStoredInToken,
-      process.env.ACCESS_TOKEN_SECRET as string
+      process.env.ACCESS_TOKEN_SECRET as string,
+      { expiresIn: process.env.ACCESS_TOKEN_LIFETIME as string }
     );
 
     await mailService.verificationMail(email, token, user);
@@ -62,7 +63,8 @@ class AuthService {
       };
       const accessToken = jwt.sign(
         dataStoredInToken,
-        process.env.ACCESS_TOKEN_SECRET as string
+        process.env.ACCESS_TOKEN_SECRET as string,
+        { expiresIn: process.env.ACCESS_TOKEN_LIFETIME as string }
       );
 
       return { success: true, accessToken, user: userData };
