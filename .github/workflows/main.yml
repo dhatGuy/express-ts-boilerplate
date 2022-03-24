@@ -1,0 +1,49 @@
+name: Main pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Setup yarn
+        run: npm install -g yarn
+
+      - name: Setup Nodejs with yarn caching
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: yarn
+
+      - name: install packages
+        run: yarn
+
+      - name: lint
+        run: yarn lint
+
+      - name: build
+        run: yarn build
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: "0"
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !(contains( join( toJson(github.event.commits.*.message) ), '#skip')) }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          WITH_V: true
+          REPO_OWNER: dhatGuy
