@@ -23,12 +23,19 @@ import { userUpdateSchema } from "./user.validation";
 @Tags("User")
 @Security("jwt")
 export class UserController {
+  /**
+   * Get all users
+   */
   @Get("/")
   async getAll(): Promise<User[]> {
     // protect this route with admin role
     return await userService.getAll();
   }
 
+  /**
+   * Retrieve a user by id. Only the user himself can retrieve his own information.
+   * @param id  Id of the user
+   */
   @Get("/:id")
   async getUserById(
     @Path() id: string,
@@ -40,6 +47,13 @@ export class UserController {
     throw new HttpException(HttpStatus.UNAUTHORIZED, "Unauthorized");
   }
 
+  /**
+   * Update user's information. Only the user himself can update his own information.
+   * @param id  Id of the user
+   * @param body
+   * @param body.name Name of the user
+   * @param body.email Email of the user
+   */
   @Put("/:id")
   @Middlewares(validate(userUpdateSchema))
   async updateUser(
@@ -54,6 +68,10 @@ export class UserController {
     throw new HttpException(HttpStatus.UNAUTHORIZED, "Unauthorized");
   }
 
+  /**
+   * Delete a user by id. Only the user himself can delete his own account.
+   * @param id  Id of the user
+   */
   @Delete("/:id")
   async deleteUser(
     @Path() id: string,

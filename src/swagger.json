@@ -254,6 +254,7 @@
 						}
 					}
 				},
+				"description": "Login route",
 				"tags": [
 					"Auth"
 				],
@@ -286,6 +287,7 @@
 						}
 					}
 				},
+				"description": "Signup route",
 				"tags": [
 					"Auth"
 				],
@@ -326,6 +328,7 @@
 						}
 					}
 				},
+				"description": "Forgot password route. An email will be sent to the user with a link to reset his password.",
 				"tags": [
 					"Auth"
 				],
@@ -351,7 +354,7 @@
 				}
 			}
 		},
-		"/auth/verify-reset-token": {
+		"/auth/verify-password-reset-token": {
 			"post": {
 				"operationId": "VerifyPasswordResetToken",
 				"responses": {
@@ -374,6 +377,7 @@
 						}
 					}
 				},
+				"description": "Verify password reset token.\r\nConfirm if the reset token is valid before changing the password.",
 				"tags": [
 					"Auth"
 				],
@@ -414,6 +418,7 @@
 						}
 					}
 				},
+				"description": "Reset password. This route is only accessible to the user who has a valid reset token.\r\nThe user will be able to change his password.",
 				"tags": [
 					"Auth"
 				],
@@ -454,6 +459,7 @@
 						}
 					}
 				},
+				"description": "Send a verification email to the user after signup.\r\nUser can also request a new verification email.\r\nAn email will be sent to the user with a link to confirm his email.",
 				"tags": [
 					"Auth"
 				],
@@ -502,6 +508,7 @@
 						}
 					}
 				},
+				"description": "Confirm user email. Check if the user has a valid token and confirm his email.",
 				"tags": [
 					"Auth"
 				],
@@ -534,6 +541,7 @@
 						}
 					}
 				},
+				"description": "Get the current user.",
 				"tags": [
 					"Auth"
 				],
@@ -563,6 +571,7 @@
 						}
 					}
 				},
+				"description": "Get all users",
 				"tags": [
 					"User"
 				],
@@ -594,6 +603,7 @@
 						}
 					}
 				},
+				"description": "Retrieve a user by id. Only the user himself can retrieve his own information.",
 				"tags": [
 					"User"
 				],
@@ -604,6 +614,7 @@
 				],
 				"parameters": [
 					{
+						"description": "Id of the user",
 						"in": "path",
 						"name": "id",
 						"required": true,
@@ -627,6 +638,7 @@
 						}
 					}
 				},
+				"description": "Update user's information. Only the user himself can update his own information.",
 				"tags": [
 					"User"
 				],
@@ -637,6 +649,7 @@
 				],
 				"parameters": [
 					{
+						"description": "Id of the user",
 						"in": "path",
 						"name": "id",
 						"required": true,
@@ -675,6 +688,7 @@
 						}
 					}
 				},
+				"description": "Delete a user by id. Only the user himself can delete his own account.",
 				"tags": [
 					"User"
 				],
@@ -685,6 +699,7 @@
 				],
 				"parameters": [
 					{
+						"description": "Id of the user",
 						"in": "path",
 						"name": "id",
 						"required": true,
