@@ -21,17 +21,20 @@ export const expressAuthentication = async (
         process.env.ACCESS_TOKEN_SECRET as string
       ) as DataStoredInToken;
 
-      const data = await prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: {
           id: verified.id,
         },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+        },
       });
 
-      if (!data) {
+      if (!user) {
         throw new HttpException(401, "Invalid token");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { passwordHash, ...user } = data;
       return user;
     } catch (error) {
       let message;
