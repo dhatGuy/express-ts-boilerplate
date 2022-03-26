@@ -1,4 +1,4 @@
-import * as z from "zod"
+import * as z from "zod";
 
 export const _resetTokensModel = z.object({
   id: z.number().int(),
@@ -8,4 +8,4 @@ export const _resetTokensModel = z.object({
   expiresAt: z.date(),
   createdAt: z.date(),
   updatedAt: z.date(),
-})
+});

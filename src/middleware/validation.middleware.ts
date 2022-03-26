@@ -7,7 +7,6 @@ import logger from "../utils/logger";
 export const validate =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body);
     try {
       schema.parse(req.body);
       return next();

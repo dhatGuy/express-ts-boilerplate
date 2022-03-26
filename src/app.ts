@@ -8,6 +8,7 @@ import { loggerMiddleware } from "./middleware/logger.middleware";
 import { notFoundMiddleware } from "./middleware/not-found.middleware";
 import { RegisterRoutes } from "./routes";
 import swaggerJson from "./swagger.json";
+import logger from "./utils/logger";
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 try {
   app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerJson));
 } catch (err) {
-  console.error("Unable to read swagger.json", err);
+  logger.error("Unable to read swagger.json", err);
 }
 
 RegisterRoutes(app);
