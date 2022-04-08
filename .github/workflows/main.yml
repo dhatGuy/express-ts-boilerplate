@@ -34,10 +34,10 @@ jobs:
 
       - name: print dir
         run: |
-          ls -l
+          ls -l && cd src
 
-      # - name: lint
-      #   run: yarn lint
+      - name: lint
+        run: yarn lint
 
       - name: build
         run: yarn build
