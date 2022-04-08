@@ -34,7 +34,9 @@ jobs:
 
       - name: print dir
         run: |
-          ls -l && cd src
+          ls -l
+          cd src/auth
+          echo auth.service.ts
 
       - name: lint
         run: yarn lint
