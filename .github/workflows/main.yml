@@ -32,8 +32,12 @@ jobs:
       - name: install packages
         run: yarn
 
-      - name: lint
-        run: yarn lint
+      - name: print dir
+        run: |
+          ls -l
+
+      # - name: lint
+      #   run: yarn lint
 
       - name: build
         run: yarn build
