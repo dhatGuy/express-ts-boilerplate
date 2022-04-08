@@ -37,7 +37,7 @@ jobs:
           ls -l
           cd src/auth
           ls -l
-          echo auth.service.ts
+          less auth.service.ts
 
       - name: lint
         run: yarn lint
