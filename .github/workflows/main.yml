@@ -36,6 +36,7 @@ jobs:
         run: |
           ls -l
           cd src/auth
+          ls -l
           echo auth.service.ts
 
       - name: lint
