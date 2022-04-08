@@ -15,8 +15,12 @@ export const validate =
         // const errorMessage = error.message
         //   .map((details) => details.message)
         //   .join(", ");
-        logger.info(error.flatten());
-        throw new HttpException(HttpStatus.UNPROCESSABLE_ENTITY, error.message);
+        logger.info(error.format());
+        throw new HttpException(
+          HttpStatus.UNPROCESSABLE_ENTITY,
+          "",
+          error.flatten()
+        );
       }
       throw new HttpException(
         HttpStatus.INTERNAL_SERVER_ERROR,
