@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
 
 jobs:
   main_pipeline:
@@ -14,23 +20,23 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Setup yarn
-        run: npm install -g yarn
+      # - name: Setup yarn
+      #   run: npm install -g yarn
 
-      - name: Setup Nodejs with yarn caching
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-          cache: yarn
+      # - name: Setup Nodejs with yarn caching
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: "16"
+      #     cache: yarn
 
       - name: install packages
-        run: yarn
+        run: npm i
 
       - name: lint
-        run: yarn lint
+        run: npm run lint
 
       - name: build
-        run: yarn build
+        run: npm run build
 
   tag_release:
     needs: [main_pipeline]
