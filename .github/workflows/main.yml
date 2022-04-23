@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: "16"
 
-      - name: Setup yarn
-        run: npm install -g yarn
+      # - name: Setup yarn
+      #   run: npm install -g yarn
 
       # - name: Setup Nodejs with yarn caching
       #   uses: actions/setup-node@v2
@@ -30,20 +30,13 @@ jobs:
       #     cache: yarn
 
       - name: install packages
-        run: yarn
-
-      - name: print dir
-        run: |
-          ls -l
-          cd src/auth
-          ls -l
-          less auth.service.ts
+        run: npm i
 
       - name: lint
-        run: yarn lint
+        run: npm lint
 
       - name: build
-        run: yarn build
+        run: npm build
 
   tag_release:
     needs: [main_pipeline]
