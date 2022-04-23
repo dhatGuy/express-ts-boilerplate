@@ -33,10 +33,10 @@ jobs:
         run: npm i
 
       - name: lint
-        run: npm lint
+        run: npm run lint
 
       - name: build
-        run: npm build
+        run: npm run build
 
   tag_release:
     needs: [main_pipeline]
